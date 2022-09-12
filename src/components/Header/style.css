@@ -1,0 +1,13 @@
+
+header{
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Nunito", "Arial", "Helvetica", sans-serif;
+    box-shadow: 2px 2px 14px 0.5px;
+    height: 90px;
+}
+a{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
