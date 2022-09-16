@@ -2,3 +2,35 @@ main{
     min-height: calc(100vh - 180px);
     padding: 30px;
 }
+
+.cards{
+    display: grid;
+    flex-direction: column;
+    gap: 60px;
+
+}
+.post{
+    transition-property: transform,box-shadow;
+    transition-duration: 0.5s;
+    padding: 40px;
+    box-shadow: 0 0 1px 0 rgb(45, 45, 45);
+    border-radius: 15px;
+ 
+}
+.post:hover{
+    box-shadow: 0 0 1px 0 #2d2d2d,0 0 1px 0 rgb(45, 45, 45);
+    font-size: 20px;
+    transform: scale(1.01,1.01);
+}
+.post-text{
+    margin-top: 15px;
+}
+img{
+    float: right;
+}
+@media(min-width:1260px) {
+    main{
+    padding-left: calc(50% - 600px);
+    padding-right: calc(50% - 600px);
+    }		
+}

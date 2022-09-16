@@ -10,4 +10,14 @@ header{
 }
 a{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+@media(min-width:1260px) {
+  header{
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
+  }		
 }
