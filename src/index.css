@@ -14,18 +14,18 @@ body {
 	align-items: center;
 	justify-content: center; */
 }
-h1{
+/* h1{
 	font-weight: 800;
 	color: inherit;
 
-}
+} */
 /* .page{
 	margin: 0px auto;
 	width: 1200px;
 } */
-	@media(min-width:1260px) {
+	/* @media(min-width:1260px) {
 		header{
 		padding-left: calc(50% - 600px);
 		padding-right: calc(50% - 600px);
 		}		
-	}
+	} */

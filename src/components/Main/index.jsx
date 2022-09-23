@@ -17,8 +17,8 @@ export default function Main({data}) {
                 <div className="post-text">{post.description}</div>
                 </div>)}
             </div>
-            <br/>
-            {textarr.map((post,i)=><div key={i} className='post'>{post.split('.').map((par,i,arr)=>i !== arr.length-1 && <p key={i} >{par}.</p>)}</div>)}
+            
+            {/* {textarr.map((post,i)=><div key={i} className='post'>{post.split('.').map((par,i,arr)=>i !== arr.length-1 && <p key={i} >{par}.</p>)}</div>)} */}
             
         </main>
     )
