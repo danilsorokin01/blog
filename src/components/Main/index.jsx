@@ -11,7 +11,7 @@ export default function Main({data}) {
         <main>
             <h1>Devs Blog</h1>
             <div className="cards">
-                {data.map(post=> <div className="post">Post name: {post.name}
+                {data.map(post=> <div key={post.id} className="post">Post name: {post.name}
 
                 <img width={300} src={post.image} alt="/"/>
                 <div className="post-text">{post.description}</div>

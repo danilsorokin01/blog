@@ -1,42 +1,90 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+// import {Ctx} from "../App";
+import { Ctx } from "../App";
 
-export default function Modal({state,auth}){
-    const [name,setName] = useState("")
-    const [email,setEmail] = useState("")
-    const [psw,setPsw] = useState("")
-    const [psw2,setPsw2] = useState("")
-    const [modalState,setModalState] = useState(state)
-        return(
-           <div className="modal_conteiner" style={{display: state==="active"? "flex":"none"}}>
-                <div className="modal">
-                    <h2>{auth? 'Войти':'Зарегистрироваться'}</h2>
-                    <form action="">
-                        <input type="text" placeholder="Введите свой Email" name="email" value={email}
-                        onChange={(e)=>{
-                            setEmail(e.target.value)
-                        }} />
-                        {!auth&&<input type="text" placeholder="Введите имя пользоватетя" name="user" value={name}
-                        onChange={(e)=>{
-                            setName(e.target.value)
-                        }} />}
-                        <input type="password" value={psw} placeholder="Введите свой пароль" name="password" 
-                        onChange={(e)=>{
-                            setPsw(e.target.value)
-                        }} />
-                        {!auth &&<input type="password" value={psw2} placeholder="Повторите свой пароль" 
-                        onChange={(e)=>{
-                            setPsw2(e.target.value)
-                        }} />}
-                        <button type="submit">
-                        {auth ? 'Войти':'Зарегистрироваться'}
-                        </button>
-                        <button
-                        disabled ={!auth && psw !==psw2}
-                        type="button" onClick={()=>{
 
-                        }}>Close</button>
-                    </form>
-                </div>
-           </div>
-        )
+export default ({state, auth, updState}) => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [pwd, setPwd] = useState("");
+    const [pwd2, setPwd2] = useState("");
+    const {db, updDb, updUName, updUId} = useContext(Ctx);
+
+    const handler = e => {
+        e.preventDefault();
+        let body = {};
+        body.email = email;
+        body.pwd = pwd;
+        if (!auth) {
+            body.name = name;
+        }
+        console.log(body);
+        setEmail("");
+        setName("");
+        setPwd("");
+        setPwd2("");
+        updState(false);
     }
+    if(auth){
+        let user = db.filter(rec =>rec.email === email && rec.pwd=== pwd)[0];
+        if(user){
+            updUName(user.name);
+            updUId(db.findIndex(rec.email=== email && rec.pwd==pwd))
+    }}
+
+    return <div className="modal__container" style={{
+        display: state ? "flex" : "none"
+    }}>
+        <div className="modal">
+            <h2>{auth ? "Войти" : "Зарегистрироваться"}</h2>
+            <form onSubmit={handler}>
+                {/* 
+                    Почта - уникальный логин
+                    Имя (регистрация)
+                    Пароль
+                    Повторить пароль (регистрация)
+                */}
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Электронный адрес"
+                    value={email}
+                    onChange={(e) => {setEmail(e.target.value)}}
+                />
+                {!auth && <input 
+                    type="text"
+                    name="name"
+                    value={name}
+                    placeholder="Имя пользователя"
+                    onChange={(e) => {setName(e.target.value)}}
+                />}
+                <input 
+                    type="password"
+                    name="pwd"
+                    placeholder="Пароль"
+                    value={pwd}
+                    onChange={(e) => {setPwd(e.target.value)}}
+                />
+                {!auth && <input 
+                    type="password"
+                    placeholder="Повторить пароль"
+                    value={pwd2}
+                    onChange={(e) => {setPwd2(e.target.value)}}
+                />}
+                <button 
+                    type="submit"
+                    disabled={!auth && (!pwd || !pwd2 || pwd !== pwd2)}
+                >
+                    {auth ? "Войти" : "Зарегистрироваться"}
+                </button>
+            </form>
+            <button type="button" onClick={() =>{
+                updState(!state)
+                setEmail("");
+                setName("");
+                setPwd("");
+                setPwd2("");
+            }}>close</button>
+        </div>
+    </div>
+}
